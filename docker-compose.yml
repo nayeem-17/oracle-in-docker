@@ -2,7 +2,7 @@ version: '3'
 
 services:
   oracle-db:
-    image: banglamon/oracle193db:19.3.0-ee
+    image: store/oracle/database-enterprise:12.2.0.1
     ports:
       - "1521:1521"
       - "8080:8080"
@@ -10,8 +10,9 @@ services:
     # restart: unless-stopped
     environment:
       - ORACLE_ALLOW_REMOTE=true
-      - ORACLE_SID=DEMON
-      - ORACLE_PDB=DEMONPDB
-      - ORACLE_PWD=Oracle123
+      - ORACLE_PWD=ORCL
+      - ORACLE_SID=ORCL
     volumes:
-      - ./oradata:/opt/oracle/oradata # persistent oracle database data.
+      - ./oradata/data:/opt/oracle/oradata # persistent oracle database data.
+      - ./oradata/scripts/setup:/opt/oracle/scripts/setup
+
